@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using hw.Services;
+using hw.Interfaces;
 
 namespace hw.Controllers;
 
@@ -6,40 +8,54 @@ namespace hw.Controllers;
 [Route("[controller]")]
 public class bookController : ControllerBase
 {
-    private static readonly string[] authers = new[]
-    {
-        "Aviva", "Libby", "Sari", "Michal", "Dasi", "Effy"
-    };
-   private static readonly string[] name = new[]
-    {
-        "Childrens", "The house", "Panic in air"
-    };
-      private static List<book>? arr;
 
-    public bookController()
+ private IbookService bookService;
+
+    public bookController(IbookService bookService)
     {
-        arr = Enumerable.Range(1, 5).Select(index => new book
-        {
-           name=name[Random.Shared.Next(name.Length)]
-            length = Random.Shared.Next(1, 5555),
-            auther = authers[Random.Shared.Next(authers.Length)]
-        }).ToList();
+        this.bookService=bookService;
+        
     }
-    }
+    
 
     [HttpGet]
     public IEnumerable<book> Get()
     {
-        return arr;
+       bookService.GetAll();
     }
+
+
     [HttpGet("{name}")]
     public IEnumerable<book> Get(string name)
     {
-          var res = arr?.FirstOrDefault(w => w.name == name); 
+          var res = bookService.Get(name); 
 
         if (res == null)
             return NotFound();
         
         return res;
+    }
+
+
+    [HttpPost]
+    public IActionResult Add(book book){
+        bookService.Add(book);
+        return CreatedAtAction(nameof(Add), book);
+    }
+
+    [HttpPut("{name}")]
+    public IActionResult Update(String name,book book){
+     if(bookService.Get(name)==null)
+        return NotFound();
+        bookService.Update(String name,book book);
+        return CreatedAtAction(nameof(Update), book);
+    }
+
+    [HttpDelete("{name}")]
+    public IActionResult Delete(String name){
+       if(bookService.Get(name)==null)
+        return NotFound();
+        bookService.Delete(String name);
+        return CreatedAtAction(nameof(Delete), book);
     }
 }

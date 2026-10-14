@@ -16,11 +16,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\כל התקיות\\תכנות\\hw\\hw.csproj",
+      "projectUniqueName": "C:\\כל התקיות\\תכנות\\core web API\\hw\\hw.csproj",
       "projectName": "hw",
-      "projectPath": "C:\\כל התקיות\\תכנות\\hw\\hw.csproj",
+      "projectPath": "C:\\כל התקיות\\תכנות\\core web API\\hw\\hw.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "C:\\כל התקיות\\תכנות\\hw\\obj\\",
+      "outputPath": "C:\\כל התקיות\\תכנות\\core web API\\hw\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
